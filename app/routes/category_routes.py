@@ -26,3 +26,14 @@ def list_categories(
     response = uc.list_categories()
     
     return response
+
+@router.delete('/delete/{id}')
+def delete_categories(
+    id: int,
+    db_session: Session = Depends(get_db_session)
+):
+    uc = CategoryUseCases(db_session=db_session)
+    uc.delete_category(id=id)
+    
+    return Response(status_code=status.HTTP_200_OK)
+
